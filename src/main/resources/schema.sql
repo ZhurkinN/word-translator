@@ -1,26 +1,21 @@
-drop table if exists request;
-create table request
+CREATE TABLE IF NOT EXISTS request
 (
-    id bigint not null unique,
-    date timestamp not null,
-    input_text varchar(255) not null,
-    translated_text varchar(255) not null,
-    translation_rule varchar(255) not null,
-    ip varchar(255) not null
+    id bigint NOT NULL UNIQUE,
+    date_time timestamp NOT NULL,
+    input_text varchar(255) NOT NULL,
+    translated_text varchar(255) NOT NULL,
+    translation_rule varchar(255) NOT NULL,
+    ip varchar(255) NOT NULL,
+    CONSTRAINT pk_request PRIMARY KEY (id)
 );
 
-alter table request
-    add constraint pk_id primary key(id);
-
-drop table if exists translated_words;
-create table translated_words
+CREATE TABLE IF NOT EXISTS translated_words
 (
-    id bigint not null,
-    request_id bigint not null,
-    input_word varchar(255) not null,
-    translated_word varchar(255) not null
+    id bigint NOT NULL UNIQUE,
+    request_id bigint NOT NULL,
+    input_word varchar(255) NOT NULL,
+    translated_word varchar(255) NOT NULL,
+    CONSTRAINT pk_words PRIMARY KEY (id),
+    CONSTRAINT fk_request FOREIGN KEY (request_id)
+        REFERENCES request (id)
 );
-
-alter table translated_words
-    add constraint fk_id foreign key(request_id)
-        references request(id);
