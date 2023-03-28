@@ -25,9 +25,9 @@ public class TranslatorRepositoryImpl implements TranslatorRepository {
 
     @Override
     public Long saveRequestInfo(LocalDateTime dateTime,
-                                   String inputText,
-                                   String translationRule,
-                                   String ip) {
+                                String inputText,
+                                String translationRule,
+                                String ip) {
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         PreparedStatementCreatorFactory preparedStatementCreatorFactory = new PreparedStatementCreatorFactory(

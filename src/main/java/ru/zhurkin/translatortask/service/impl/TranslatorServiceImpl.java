@@ -1,6 +1,7 @@
 package ru.zhurkin.translatortask.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -22,6 +23,9 @@ import static ru.zhurkin.translatortask.constants.ErrorMessageKeeper.YANDEX_API_
 @RequiredArgsConstructor
 public class TranslatorServiceImpl implements TranslatorService {
 
+    @Value("${yandex.api.folder-id}")
+    private String folderId;
+
     private final WebClient webClient;
     private final TranslatorRepository translatorRepository;
 
@@ -37,7 +41,7 @@ public class TranslatorServiceImpl implements TranslatorService {
         List<String> translatedWords = new ArrayList<>();
 
         for (String word : inputWords) {
-            YandexRequestDTO request = new YandexRequestDTO(targetLanguage, List.of(word), "b1gppvd1klmlc427uqpk");
+            YandexRequestDTO request = new YandexRequestDTO(targetLanguage, List.of(word), folderId);
             YandexResponseDTO response = webClient.post()
                     .body(BodyInserters.fromValue(request))
                     .retrieve()
