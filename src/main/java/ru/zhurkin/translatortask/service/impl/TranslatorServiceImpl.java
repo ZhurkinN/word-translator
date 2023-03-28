@@ -5,11 +5,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
-import ru.zhurkin.translatortask.dto.request.YandexRequestDTO;
-import ru.zhurkin.translatortask.dto.response.YandexResponseDTO;
-import ru.zhurkin.translatortask.exception.YandexWebClientException;
-import ru.zhurkin.translatortask.helper.InputParametersValidator;
-import ru.zhurkin.translatortask.helper.StringHelper;
+import ru.zhurkin.translatortask.service.model.YandexRequestDTO;
+import ru.zhurkin.translatortask.service.model.YandexResponseDTO;
+import ru.zhurkin.translatortask.support.exception.YandexWebClientException;
+import ru.zhurkin.translatortask.support.helper.InputParametersValidator;
+import ru.zhurkin.translatortask.support.helper.StringHelper;
 import ru.zhurkin.translatortask.repository.TranslatorRepository;
 import ru.zhurkin.translatortask.service.TranslatorService;
 
@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ru.zhurkin.translatortask.constants.ErrorMessageKeeper.YANDEX_API_ERROR;
+import static ru.zhurkin.translatortask.support.constants.ErrorMessageKeeper.YANDEX_API_ERROR;
 
 @Service
 @RequiredArgsConstructor

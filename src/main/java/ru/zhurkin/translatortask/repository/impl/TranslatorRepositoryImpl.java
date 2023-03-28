@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
-import static ru.zhurkin.translatortask.constants.SqlQueriesKeeper.*;
+import static ru.zhurkin.translatortask.support.constants.SqlQueriesKeeper.*;
 
 @Repository
 @RequiredArgsConstructor

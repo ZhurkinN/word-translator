@@ -1,4 +1,4 @@
-package ru.zhurkin.translatortask.helper;
+package ru.zhurkin.translatortask.support.helper;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

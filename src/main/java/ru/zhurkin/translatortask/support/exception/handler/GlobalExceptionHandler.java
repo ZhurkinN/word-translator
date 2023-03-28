@@ -1,12 +1,12 @@
-package ru.zhurkin.translatortask.exception.handler;
+package ru.zhurkin.translatortask.support.exception.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import ru.zhurkin.translatortask.dto.response.ApplicationErrorDTO;
-import ru.zhurkin.translatortask.exception.IncorrectInputDataException;
-import ru.zhurkin.translatortask.exception.YandexWebClientException;
+import ru.zhurkin.translatortask.support.exception.model.ApplicationErrorDTO;
+import ru.zhurkin.translatortask.support.exception.IncorrectInputDataException;
+import ru.zhurkin.translatortask.support.exception.YandexWebClientException;
 
 @Slf4j
 @ControllerAdvice

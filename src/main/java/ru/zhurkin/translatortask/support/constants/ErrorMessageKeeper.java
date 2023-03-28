@@ -1,4 +1,4 @@
-package ru.zhurkin.translatortask.constants;
+package ru.zhurkin.translatortask.support.constants;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

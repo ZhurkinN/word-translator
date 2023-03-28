@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.zhurkin.translatortask.dto.request.TranslatorParametersDTO;
-import ru.zhurkin.translatortask.dto.response.TranslatorResultDTO;
+import ru.zhurkin.translatortask.controller.model.TranslatorParametersDTO;
+import ru.zhurkin.translatortask.controller.model.TranslatorResultDTO;
 import ru.zhurkin.translatortask.service.TranslatorService;
 
 @RestController

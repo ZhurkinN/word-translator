@@ -1,4 +1,4 @@
-package ru.zhurkin.translatortask.exception;
+package ru.zhurkin.translatortask.support.exception;
 
 public class YandexWebClientException extends RuntimeException {
 

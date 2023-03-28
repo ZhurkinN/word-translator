@@ -1,4 +1,4 @@
-package ru.zhurkin.translatortask.dto.response;
+package ru.zhurkin.translatortask.service.model;
 
 import java.util.List;
 
