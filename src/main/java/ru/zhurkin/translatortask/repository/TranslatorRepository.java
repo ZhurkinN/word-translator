@@ -4,16 +4,16 @@ import java.time.LocalDateTime;
 
 public interface TranslatorRepository {
 
-    boolean saveRequestInfo(Long id,
-                            LocalDateTime dateTime,
+    Long saveRequestInfo(LocalDateTime dateTime,
                             String inputText,
-                            String translatedText,
                             String translationRule,
                             String ip);
 
-    boolean saveTranslatedWord(Long id,
-                               Long requestId,
+    boolean saveTranslatedWord(Long requestId,
                                String inputWord,
                                String translatedWord);
+
+    boolean setTranslatedText(Long requestId,
+                              String translatedText);
 
 }

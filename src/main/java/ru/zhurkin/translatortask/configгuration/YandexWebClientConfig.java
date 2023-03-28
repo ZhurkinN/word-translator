@@ -1,4 +1,4 @@
-package ru.zhurkin.translatortask.config;
+package ru.zhurkin.translatortask.configгuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -31,7 +31,7 @@ public class YandexWebClientConfig {
                 baseUrl(BASE_URL)
                 .defaultHeader(AUTHORIZATION, "Bearer " + apiKey)
                 .defaultHeader(CONTENT_TYPE, APPLICATION_JSON)
-                .defaultUriVariables(uriParametersMap)
+                //.defaultUriVariables(uriParametersMap)
                 .build();
     }
 }

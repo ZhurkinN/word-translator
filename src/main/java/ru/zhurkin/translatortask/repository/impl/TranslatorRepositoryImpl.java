@@ -2,14 +2,20 @@ package ru.zhurkin.translatortask.repository.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.PreparedStatementCreatorFactory;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import ru.zhurkin.translatortask.repository.TranslatorRepository;
 
 import java.sql.PreparedStatement;
+import java.sql.Types;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Objects;
 
-import static ru.zhurkin.translatortask.constants.SqlQueriesKeeper.INSERT_REQUEST_QUERY;
-import static ru.zhurkin.translatortask.constants.SqlQueriesKeeper.INSERT_TRANSLATED_WORD;
+import static ru.zhurkin.translatortask.constants.SqlQueriesKeeper.*;
 
 @Repository
 @RequiredArgsConstructor
@@ -18,38 +24,48 @@ public class TranslatorRepositoryImpl implements TranslatorRepository {
     private final JdbcTemplate jdbcTemplate;
 
     @Override
-    public boolean saveRequestInfo(Long id,
-                                   LocalDateTime dateTime,
+    public Long saveRequestInfo(LocalDateTime dateTime,
                                    String inputText,
-                                   String translatedText,
                                    String translationRule,
                                    String ip) {
 
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        PreparedStatementCreatorFactory preparedStatementCreatorFactory = new PreparedStatementCreatorFactory(
+                INSERT_REQUEST_QUERY,
+                Types.TIMESTAMP, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR
+        );
+        preparedStatementCreatorFactory.setReturnGeneratedKeys(true);
+        PreparedStatementCreator preparedStatementCreator =
+                preparedStatementCreatorFactory.newPreparedStatementCreator(
+                        List.of(dateTime, inputText, translationRule, ip)
+                );
+        jdbcTemplate.update(preparedStatementCreator, keyHolder);
+        return Objects.requireNonNull(keyHolder.getKey()).longValue();
+    }
+
+    @Override
+    public boolean saveTranslatedWord(Long requestId,
+                                      String inputWord,
+                                      String translatedWord) {
+
         int rowsChanged = jdbcTemplate.update(con -> {
-            PreparedStatement preparedStatement = con.prepareStatement(INSERT_REQUEST_QUERY);
-            preparedStatement.setObject(1, id);
-            preparedStatement.setObject(2, dateTime);
-            preparedStatement.setObject(3, inputText);
-            preparedStatement.setObject(4, translatedText);
-            preparedStatement.setObject(5, translationRule);
-            preparedStatement.setObject(6, ip);
+            PreparedStatement preparedStatement = con.prepareStatement(INSERT_TRANSLATED_WORD);
+            preparedStatement.setObject(1, requestId);
+            preparedStatement.setObject(2, inputWord);
+            preparedStatement.setObject(3, translatedWord);
             return preparedStatement;
         });
         return rowsChanged > 0;
     }
 
     @Override
-    public boolean saveTranslatedWord(Long id,
-                                      Long requestId,
-                                      String inputWord,
-                                      String translatedWord) {
+    public boolean setTranslatedText(Long requestId,
+                                     String translatedText) {
 
         int rowsChanged = jdbcTemplate.update(con -> {
-            PreparedStatement preparedStatement = con.prepareStatement(INSERT_TRANSLATED_WORD);
-            preparedStatement.setObject(1, id);
+            PreparedStatement preparedStatement = con.prepareStatement(SET_TRANSLATED_TEXT);
+            preparedStatement.setObject(1, translatedText);
             preparedStatement.setObject(2, requestId);
-            preparedStatement.setObject(3, inputWord);
-            preparedStatement.setObject(4, translatedWord);
             return preparedStatement;
         });
         return rowsChanged > 0;

@@ -1,4 +1,4 @@
-package ru.zhurkin.translatortask.config;
+package ru.zhurkin.translatortask.configгuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
