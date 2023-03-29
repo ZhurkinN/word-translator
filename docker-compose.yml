@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  app:
+    container_name: "translator-container"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - YANDEX_API_KEY=t1.9euelZqczY7PlsvMic-elYuXxo-Qxu3rnpWay56SypGamJqNxsjNno_KzMjl8_cXIHVe-e81OAFA_t3z91dOcl757zU4AUD-.pncW6T2TlH33e9Z7DDzEOczp6YSQ7bv8x-GhMrNdaUAYKdct1sVGZwJz94xIOJ8aa89Yc537GRpob12y2-fDDQ
+      - YANDEX_FOLDER_ID=b1gppvd1klmlc427uqpk
+      - H2_DB_NAME=<Your H2 in-memory database name>
+      - H2_USERNAME=<Your H2 username>
+      - H2_PASSWORD=<Your H2 password>

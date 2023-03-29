@@ -4,6 +4,18 @@ plugins {
     id("io.spring.dependency-management") version "1.1.0"
 }
 
+buildscript {
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:3.0.5.RELEASE")
+    }
+}
+
+tasks.withType<Jar> {
+    manifest {
+        attributes["Main-Class"] = "ru.zhurkin.translatortask.TranslatorTaskApplication"
+    }
+}
+
 group = "ru.zhurkin"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
